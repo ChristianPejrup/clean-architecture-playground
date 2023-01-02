@@ -29,6 +29,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Account.Api\Account.Api.csproj" />
+	  <ProjectReference Include="..\Account.Client\Account.Client.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

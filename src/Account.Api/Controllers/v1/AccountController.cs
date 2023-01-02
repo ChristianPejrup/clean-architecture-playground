@@ -1,5 +1,6 @@
 ﻿using Account.Api.Models;
 using Account.ApplicationServices;
+using Account.Client;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 

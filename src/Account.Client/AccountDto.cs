@@ -1,4 +1,4 @@
-﻿namespace Account.Api.Controllers.v1
+﻿namespace Account.Client
 {
     public class AccountDto
     {

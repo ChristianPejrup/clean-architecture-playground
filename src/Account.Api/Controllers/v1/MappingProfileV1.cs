@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Account.Client;
+using AutoMapper;
 
 namespace Account.Api.Controllers.v1
 {

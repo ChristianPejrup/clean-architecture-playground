@@ -1,19 +1,15 @@
-﻿using Account.IntegrationTests;
+﻿using Account.Client;
+using Account.IntegrationTests;
 using Microsoft.AspNetCore.Mvc.Testing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Account.Tests
 {
-    public class AccountTests 
-        : IClassFixture<CustomWebApplicationFactory<Program>>
+    public class AccountTests : IClassFixture<CustomWebApplicationFactory<Program>>
     {
         private readonly CustomWebApplicationFactory<Program> _factory;
         private readonly HttpClient _client;
+        private readonly IAccountClient _accountClient;
 
         public AccountTests(CustomWebApplicationFactory<Program> factory)
         {
@@ -22,19 +18,20 @@ namespace Account.Tests
             {
                 AllowAutoRedirect = false
             });
+            _accountClient = new AccountClient(_client);
         }
 
         [Fact]
-        public async Task test()
+        public async Task GetAccount()
         {
             // Arrange
             var expected = Guid.NewGuid();
 
             //Act
-            var actual = await _client.GetAsync($"/api/v1/accounts/{expected}");
+            var actual = await _accountClient.GetAccountAsync(expected);
 
             //Assert
-            Assert.True(actual.IsSuccessStatusCode);
+            Assert.Equal(expected, actual.Id);
         }
     }
 }
