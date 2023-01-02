@@ -4,6 +4,7 @@ using Account.Infrastructure.Sql;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Shared.AspNetCore.Mvc.Abstractions;
 
 public class Program
 {
@@ -13,15 +14,18 @@ public class Program
 
         // Add services to the container.
 
-        builder.Services.AddControllers()
-            .AddJsonOptions(ops =>
-            {
-                ops.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-                ops.JsonSerializerOptions.WriteIndented = true;
-                ops.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                ops.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
-                ops.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-            });
+        builder.Services.AddControllers(config =>
+        {
+            config.Filters.Add(typeof(ExceptionFilter));
+        })
+        .AddJsonOptions(ops =>
+        {
+            ops.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            ops.JsonSerializerOptions.WriteIndented = true;
+            ops.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            ops.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+            ops.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
 
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
