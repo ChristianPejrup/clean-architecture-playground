@@ -29,10 +29,11 @@ public class Program
 
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<AccountQuery>());
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddScoped<IAccountApplicationService, AccountApplicationService>();
         builder.Services.AddScoped<IAccountReader, AccountReader>();
         builder.Services.AddScoped<IAccountWriter, AccountWriter>();
 

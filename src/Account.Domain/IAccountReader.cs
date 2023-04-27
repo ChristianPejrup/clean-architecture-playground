@@ -2,6 +2,6 @@
 {
     public interface IAccountReader
     {
-        public Task<Account> GetAccount(Guid id);
+        public Task<Account> Get(Guid id, CancellationToken cancellation = default);
     }
 }

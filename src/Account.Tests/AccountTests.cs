@@ -28,7 +28,7 @@ namespace Account.Tests
         {
             // Arrange
             var expected = Guid.NewGuid();
-            _factory.AccountReaderMock.GetAccount(expected).Returns(new Domain.Account { Id = expected });
+            _factory.AccountReaderMock.Get(expected).Returns(new Domain.Account { Id = expected });
 
             //Act
             var actual = await _accountClient.GetAccountAsync(expected);
@@ -42,7 +42,7 @@ namespace Account.Tests
         {
             // Arrange
             var expected = Guid.NewGuid();
-            _factory.AccountReaderMock.GetAccount(expected).ThrowsAsync(new Shared.Exceptions.NotFoundException(expected));
+            _factory.AccountReaderMock.Get(expected).ThrowsAsync(new Shared.Exceptions.NotFoundException(expected));
 
             //Act + Assert
             await Assert.ThrowsAsync<NotFoundException>(() => _accountClient.GetAccountAsync(expected));

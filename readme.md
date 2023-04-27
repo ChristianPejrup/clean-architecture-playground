@@ -18,6 +18,8 @@ Intention of the repository is to try and show small **oppinionated** optimizati
 
 [ ] Specflow integration test(s)
 
+[x] Mediatr (CQRS)
+
 
 ## Domain Services
 

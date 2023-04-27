@@ -4,17 +4,17 @@ namespace Account.Infrastructure.Sql
 {
     public class AccountWriter : IAccountWriter
     {
-        public Task CreateAccount(Domain.Account account)
+        public Task<Domain.Account> Create(Domain.Account account, CancellationToken cancellation = default)
+        {
+            return Task.FromResult(account);
+        }
+
+        public Task Delete(Guid id, CancellationToken cancellation = default)
         {
             return Task.CompletedTask;
         }
 
-        public Task DeleteAccount(Domain.Account account)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task UpdateAccount(Domain.Account account)
+        public Task Update(Domain.Account account, CancellationToken cancellation = default)
         {
             return Task.CompletedTask;
         }
