@@ -2,7 +2,7 @@
 
 namespace Account.ApplicationServices
 {
-    public record AccountQuery : IRequest<Domain.Account>
+    public record GetAccountByIdQuery : IRequest<Domain.Account>
     {
         public Guid Id { get; init; }
     }

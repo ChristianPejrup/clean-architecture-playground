@@ -11,19 +11,18 @@ namespace Account.IntegrationTests
         public CustomWebApplicationFactory() 
             : base()
         {
-            AccountReaderMock = Substitute.For<IAccountReader>();
+
         }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.ConfigureTestServices(services =>
             {
-                services.AddSingleton(AccountReaderMock);
+                services.AddSingleton(sp => Substitute.For<IAccountReader>());
+                services.AddSingleton(sp => Substitute.For<IAccountWriter>());
             });
 
             builder.UseEnvironment("Development");
         }
-
-        public IAccountReader AccountReaderMock { get; private set; }
     }
 }

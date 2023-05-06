@@ -14,6 +14,11 @@ namespace Account.Infrastructure.Sql
             return Task.CompletedTask;
         }
 
+        public Task Delete(string email, CancellationToken cancellation = default)
+        {
+            return Task.CompletedTask;
+        }
+
         public Task Update(Domain.Account account, CancellationToken cancellation = default)
         {
             return Task.CompletedTask;

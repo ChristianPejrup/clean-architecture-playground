@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Exceptions", "src\Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Account.Tests", "src\Account.Tests\Account.Tests.csproj", "{CE4DCFC5-12AD-4C1D-B876-B4333643ECB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Account.Client", "src\Account.Client\Account.Client.csproj", "{EC9E6D86-2D95-44F8-BD5A-4BD631152FEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Account.Client", "src\Account.Client\Account.Client.csproj", "{EC9E6D86-2D95-44F8-BD5A-4BD631152FEF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.AspNetCore.Mvc.Abstractions", "src\Shared.AspNetCore.Mvc.Abstractions\Shared.AspNetCore.Mvc.Abstractions.csproj", "{12A66CFB-025D-49B5-82FD-943A9D712283}"
 EndProject

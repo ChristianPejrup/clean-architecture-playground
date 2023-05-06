@@ -20,39 +20,54 @@ namespace Account.Api.Controllers.v1
             _mapper = mapper;
         }
 
-        [HttpGet(Name = "CreateAccount")]
-        public async Task<AccountDto> Create(string email, CancellationToken cancellationToken)
+        [HttpPost(Name = "CreateAccount")]
+        public async Task<AccountDto> Create(CreateAccount model, CancellationToken cancellationToken)
         {
-            var command = new CreateAccountCommand { Email = email };
+            var command = new CreateAccountCommand { Email = model.Email};
             var result = await _mediator.Send(command, cancellationToken);
             var resultDto = _mapper.Map<AccountDto>(result);
 
             return resultDto;
         }
 
-        [HttpGet("{id}", Name = "DeleteAccount")]
-        public async Task Delete(Guid id, CancellationToken cancellationToken)
+        [HttpDelete("{idOrEmail}", Name = "DeleteAccount")]
+        public async Task Delete(string idOrEmail, CancellationToken cancellationToken)
         {
-            var command = new DeleteAccountCommand { Id = id };
-            await _mediator.Send(command, cancellationToken);
+            if (Guid.TryParse(idOrEmail, out var id))
+            {
+                await _mediator.Send(new DeleteAccountByIdCommand { Id = id }, cancellationToken);
+            }
+            else
+            {
+                 await _mediator.Send(new DeleteAccountByEmailCommand { Email = idOrEmail }, cancellationToken);
+            }
         }
 
 
-        [HttpGet("{id}", Name = "GetAccount")]
-        public async Task<AccountDto> Get(Guid id, CancellationToken cancellationToken)
+        [HttpGet("{idOrEmail}", Name = "GetAccount")]
+        public async Task<AccountDto> Get(string idOrEmail, CancellationToken cancellationToken)
         {
-            var query = new AccountQuery { Id = id };
-            var result = await _mediator.Send(query, cancellationToken);
+            Domain.Account result;
+            if(Guid.TryParse(idOrEmail, out var id))
+            {
+                result = await _mediator.Send(new GetAccountByIdQuery { Id = id }, cancellationToken);
+            }
+            else
+            {
+                result = await _mediator.Send(new GetAccountByEmailQuery { Email = idOrEmail}, cancellationToken);
+            }
+            
             var resultDto = _mapper.Map<AccountDto>(result);
 
             return resultDto;
         }
 
-        [HttpGet("{id}", Name = "DeleteAccount")]
-        public async Task Delete(Guid id, string email, CancellationToken cancellationToken)
+        [HttpPut("{id}", Name = "UpdateAccount")]
+        public async Task Update(Guid id, UpdateAccount updateAccount, CancellationToken cancellationToken)
         {
-            var command = new  { Id = id };
+            var command = new UpdateAccountCommand { Id = id, Email = updateAccount.Email };
             await _mediator.Send(command, cancellationToken);
         }
+
     }
 }

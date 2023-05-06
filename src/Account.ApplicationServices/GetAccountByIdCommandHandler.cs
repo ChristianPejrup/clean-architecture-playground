@@ -3,11 +3,11 @@ using MediatR;
 
 namespace Account.ApplicationServices
 {
-    public class AccountQueryHandler : IRequestHandler<GetAccountByIdQuery, Domain.Account>
+    public class GetAccountByIdCommandHandler : IRequestHandler<GetAccountByIdQuery, Domain.Account>
     {
         private readonly IAccountReader _accountReader;
 
-        public AccountQueryHandler(IAccountReader accountReader)
+        public GetAccountByIdCommandHandler(IAccountReader accountReader)
         {
             _accountReader = accountReader;
         }
