@@ -29,12 +29,13 @@ public class Program
 
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetAccountByIdQuery>());
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddScoped<IAccountApplicationService, AccountApplicationService>();
-        builder.Services.AddScoped<IAccountReader, AccountReader>();
-        builder.Services.AddScoped<IAccountWriter, AccountWriter>();
+        builder.Services.AddSingleton<IAccountReader, AccountReader>();
+        builder.Services.AddSingleton<IAccountWriter, AccountWriter>();
 
         builder.Services.AddApiVersioning(opt =>
         {

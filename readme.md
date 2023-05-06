@@ -16,7 +16,9 @@ Intention of the repository is to try and show small **oppinionated** optimizati
 
 [ ] Local Kubernetes development [Tilt](https://tilt.dev/) 
 
-[ ] Specflow integration test(s)
+[(x)] Specflow integration test(s)
+
+[x] Mediatr (CQRS)
 
 
 ## Domain Services
@@ -33,6 +35,7 @@ Moving **interfaces** that purely deal with **domain types** into the domain (eg
 
 **Projects**
 * Account.Domain
+
 
 ## Exception handling
 
@@ -64,6 +67,7 @@ HTTP Status codes are interpreted into a error message representing the status c
 
 This is a very oppinionated approach that ensure that the consumer of the service (asuming they didnt generate their client from Swagger) can just rely on normal exception handling in place of testing status codes on the individual http request(s).
 
+
 ## EF Core mapping files (Fluent API)
 
 **Status: Not started**
@@ -77,6 +81,7 @@ Some one will make the argument that **persistance model != domain model** and t
 
 [Use fluent API to configure a model](https://learn.microsoft.com/en-us/ef/core/modeling/#use-fluent-api-to-configure-a-model)
 
+
 ## HATEOAS Driven resources
 
 **Status: Not started**
@@ -87,6 +92,7 @@ As there can be a significant amount of content overhead in embedding these link
 
 [HATEOAS Driven REST APIs](https://restfulapi.net/hateoas/)
 
+
 ## Docker development environment
 
 **Status: Not started**
@@ -96,4 +102,39 @@ Docker Compose
 * Sql container
 * Api container
 
+
+## Specflow
+
+### Setup specflow
+
+[Visual Studio 2022 Specflow Extension](https://marketplace.visualstudio.com/items?itemName=TechTalkSpecFlowTeam.SpecFlowForVisualStudio2022)
+
+[VSCode 'Specflow' Extension](https://docs.specflow.org/projects/specflow/en/latest/vscode/vscode-specflow.html)
+
+[Install Specflow Visual studio templates](https://docs.specflow.org/projects/specflow/en/latest/Installation/Project-and-Item-Templates.html#installing-the-project-template)
+
+[Specflow Extension Github issue (templates not implemented for VS2022)](https://github.com/SpecFlowOSS/SpecFlow.VS/issues/73)
+
+```
+dotnet new -i SpecFlow.Templates.DotNet
+```
+
+Install Specflow LivingDoc
+```
+dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+```
+
+### Setup specflow project
+
+If the project is a WebApi test project remember to change the project sdk to
+```
+<Project Sdk="Microsoft.NET.Sdk.Web">
+```
+
+Install specflow nuget package
+```
+dotnet add [<PROJECT>] package Specflow.xUnit
+```
+
+https://docs.specflow.org/projects/specflow/en/latest/visualstudio/settings-options.html
 

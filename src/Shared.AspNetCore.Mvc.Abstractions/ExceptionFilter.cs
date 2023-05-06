@@ -32,6 +32,8 @@ namespace Shared.AspNetCore.Mvc.Abstractions
                     return StatusCodes.Status404NotFound;
                 case UnauthorizedException _:
                     return StatusCodes.Status403Forbidden;
+                case ConflictException _:
+                    return StatusCodes.Status409Conflict;
                 case BaseException _:
                     return StatusCodes.Status400BadRequest;
                 default:

@@ -23,6 +23,8 @@ namespace Account.Client
             {
                 case HttpStatusCode.NotFound:
                     throw new NotFoundException(errorMessage);
+                case HttpStatusCode.Conflict:
+                    throw new ConflictException(errorMessage);
                 case HttpStatusCode.Forbidden:
                     throw new ForbiddenException(errorMessage);
                 default:
